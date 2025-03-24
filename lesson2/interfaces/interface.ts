@@ -1,3 +1,5 @@
+                    //в назві інтерфейсу використовуємо I - IUser
+                    //інтерфейс це модель даних
 interface IUser {
     name: string;
     age: number;

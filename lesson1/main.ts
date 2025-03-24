@@ -8,14 +8,19 @@
 // //
 // // foo(1,'1asdsa');
 //
-// // let arr: any[] = [];
+// // let arr: number[] = [];
+// // arr.push(1);
+// // arr.push(2);
+// // arr.push(3);
+//
+// let arr: any[] = [];
 // // arr.push(1);
 // // arr.push('1');
 // // arr.push(true);
 //
 
-
-class User {
+//можна створити клас для типізації масива об'єктів, але поля потрібно буде ініціалізувати через конструктор (Alt+Insert)
+class Consumer {
     name: string;
     age: number;
     status: boolean;
@@ -26,19 +31,19 @@ class User {
         this.age = age;
         this.status = status;
     }
-
+//функція greeting також є необов'язковою, якщо ми визначаємо її класом
     greeting() {
         console.log('asdasd');
     }
 
 }
 
-let user = new User('asd', 123, false);
+let consumer = new Consumer('asd', 123, false);
 
 
-let users: User[] = [
-    new User('adwqeqw', 123, true)
+let consumers: Consumer[] = [
+    new Consumer('adwqeqw', 123, true)
 
 ];
 
-console.log(users);
+console.log(consumers);

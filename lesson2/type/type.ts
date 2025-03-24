@@ -9,10 +9,12 @@
 // // let f: Falsy = true;
 
 
-// type UserType = {
+// type UserType = {           //в назві типу використовуємо слово Type
 //     name: string;
 //     age: number;
 //     status: boolean
+//     extra?: string   //можна задати ще одне не обов'язкове поле позначивши його через "елвіса" - ?:
+//     foo:(str: string) => string; //функція яка приймає стрінгу і повертає стрінгу
 // }
 //
 // type UserType2 = UserType & { id: number };
