@@ -2,7 +2,7 @@
 // #67kfznmiMl
 // - Створити масив, наповнити його 10 елементами будь-якого типу, вивести кожен елемент в консоль
 
-let arr_a;
+let arr_a: any[];
 arr_a = [10, 'ff', -25, 'Hi1', '-10$', 1631 + 3, false, 54545666654545454545444444444646464879799999n, '9 or 10', ''];
 console.log(arr_a);
 console.log(arr_a[0]);
@@ -19,18 +19,23 @@ console.log(arr_a[9]);
 console.log('-------------------------');
 // #LARqoUj5I
 // - Створити 3 об'єкти які описують книги. Поля об'єкту : title ,pageCount, genre.
-
-let book1 = {
+interface Ibooks {
+    title: string;
+    pageCount: number;
+    genre: string;
+    authors?: { name: string; age: number }[]
+};
+let book1: Ibooks = {
     title: '300 Spartans',
     pageCount: 300,
     genre: 'history'
 }
-let book2 = {
+let book2: Ibooks = {
     title: '400 Italians',
     pageCount: 400,
     genre: 'comedy'
 }
-let book3 = {
+let book3: Ibooks = {
     title: '999 Americans',
     pageCount: 999,
     genre: 'fantasy'
@@ -41,7 +46,7 @@ console.log('---------------------------');
 // #sA3Gg1sCp
 // - Створити 3 об'єкти які описують книги. Поля об'єкту : title ,pageCount, genre, authors. Поле "автори" - являється  масивом. Кожен автор має поля name та age.
 
-let book4 = {
+let book4: Ibooks = {
     title: '300 Spartans',
     pageCount: 300,
     genre: 'history',
@@ -50,7 +55,7 @@ let book4 = {
         {name: 'Spartan V', age: 35}
     ]
 };
-let book5 = {
+let book5: Ibooks = {
     title: '400 Italians',
     pageCount: 400,
     genre: 'comedy',
@@ -59,7 +64,7 @@ let book5 = {
         {name: 'Italian IV', age: 45}
     ]
 };
-let book6 = {
+let book6: Ibooks = {
     title: '999 Americans',
     pageCount: 999,
     genre: 'fantasy',
@@ -70,15 +75,22 @@ let book6 = {
 };
 console.log(book4, book5, book6);
 console.log(book5.title + ', ' + book5.genre);
-console.log(book6.authors[1].name
-);
+if (book6.authors) {
+    console.log(book6.authors[1].name);
+} else {
+    console.log("No authors available for this book.");
+};
 
 console.log('------------------------');
 // #jCHFnEbdmFd
 // - Створити масив з 10 об'єктами які описують сутніть "користувач". Поля: name, username,password. Вивести в консоль пароль кожного користувача
+type UsersType = {
+    name: string;
+    username: string;
+    password: string;
+}
 
-let users;
-users = [
+let usersArr: UsersType [] = [
     {name: 'UserOne', username: 'user1', password: 'pswrd1'},
     {name: 'UserTwo', username: 'user2', password: 'pswrd2'},
     {name: 'UserThree', username: 'user3', password: 'pswrd3'},
@@ -90,20 +102,27 @@ users = [
     {name: 'UserNine', username: 'user9', password: 'pswrd9'},
     {name: 'UserTen', username: 'user10', password: 'pswrd10'}
 ];
-console.log(users[0].password);
-console.log(users[2]['password']);
-console.log(users[5].password);
-console.log(users[9].password);
-console.log(users[7].username + ': ' + users[7].password);
-console.log(users[3].name + ': ' + users[3].password);
+console.log(usersArr[0].password);
+console.log(usersArr[2]['password']);
+console.log(usersArr[5].password);
+console.log(usersArr[9].password);
+console.log(usersArr[7].username + ': ' + usersArr[7].password);
+console.log(usersArr[3].name + ': ' + usersArr[3].password);
 
 console.log('---------------------------');
 // #coYydZuaeEB
 // - описати масив, в якому буде зберігатись інформація про температуру вранці, вдень і ввечері за термін в 7 днів. Як зробити цей масив - вам потрібно подумати.
 // Нормальних варіантів опису - 2. Варіант, коли в вас буде одновимірний масив з 21 значенням виключаємо одразу
+interface IWeather1 {
+    day: string;
+    temp: {
+        morning: number;
+        afternoon: number;
+        evening: number;
+    }
+}
 
-let weather1;
-weather1 = [{
+let weather1: IWeather1[] = [{
     day: 'sunday', temp: {
         morning: 10, afternoon: 15, evening: 11
     }
@@ -139,8 +158,15 @@ console.log(weather1[5].day + ': ' + weather1[5].temp.evening);
 
 console.log('-------');
 
-let weather2;
-weather2 = [
+
+interface IWeather2 {
+    day: string;
+    morning: number;
+    afternoon: number;
+    evening: number;
+}
+
+let weather2: IWeather2[] = [
     {day: 'sunday', morning: 15, afternoon: 25, evening: 18},
     {day: 'monday', morning: 12, afternoon: 22, evening: 15},
     {day: 'tuesday', morning: 15, afternoon: 25, evening: 18},
@@ -160,7 +186,7 @@ console.log('---------------------------');
 //     - Є змінна х, якій ви надаєте довільне числове значення.
 //     Якщо змінна x не дорівнює нулю, виведіть 'Вірно', інакше виведіть 'Невірно'. Перевірте  скрипт при a, що дорівнює 1, 0, -3
 
-let x;
+let x: number;
 x = -3;
 // x = +prompt('Enter a number');
 
@@ -176,7 +202,7 @@ console.log('---------------------------');
 // - Дано змінну time яка рівна числу від 0 до 59. Потрібно написати код, який перевірить, до якої четверті години попадає число
 // (в першу, другу, третю або четверту частину години).
 
-let time;
+let time: number;
 time = 59;
 // time = +prompt('Введіть ціле число від 0 до 59')
 
@@ -197,7 +223,7 @@ console.log('---------------------------');
 // #UMoNq4biWGe
 // - У змінній day дано якесь число від 1 до 31. Потрібно визначити, у яку половину(декаду) місяця потрапляє це число (у першу, другу чи третю).
 
-let day;
+let day: number;
 day = 32;
 // day = +prompt('Введіть ціле число від 1 до 31')
 
@@ -217,7 +243,7 @@ console.log('---------------------------');
 // - Скласти розклад на тиждень за домопоги switch. Користувач вводить порядковий номер дня тижня і на екрані відображається інфа що заплановано на цей день
 // (можна замість плану на день, назву дня англійською).
 
-let schedule;
+let schedule: number;
 schedule = 1
 // schedule = +prompt('Enter the ordinal number of the day of the week.');
 switch (schedule) {
@@ -252,8 +278,8 @@ console.log('---------------------------');
 //         Потрібно знайти та вивести максимальне число з тих двох .
 //         Також потрібно врахувати коли введені рівні числа.
 
-let y;
-let z;
+let y: number;
+let z: number;
 y = 10;
 z = 0;
 
@@ -263,21 +289,19 @@ z = 0;
 if (y > z) {
     console.log(y);
     document.write('<h2>Bigger number is: <h2>' + y);
-} else if (z>y) {
+} else if (z > y) {
     console.log(z);
     document.write('<h2>Bigger number is: <h2>' + z);
-} else if (z===y) {
+} else if (z === y) {
     console.log(z);
     document.write('<h2>Bigger number is: <h2>' + z);
-} else if (z===0 && y===0) {
+} else if (z === 0 && y === 0) {
     console.log(z);
     document.write('<h2>Bigger number is: <h2>' + z);
-}
-else {
+} else {
     console.log('enter a valid number');
     document.write('<h2>enter a valid number<h2>');
 }
-
 
 
 console.log('---------------------------');
@@ -286,7 +310,7 @@ console.log('---------------------------');
 //         буде присвоювати змінній х значення "default"  якщо ви намагаєтесь присвоїти в неї falsy-значення (хибноподібні,
 //         тобто ті, які приводиться до false, а це 0 null undefined і тд).
 
-let w;
+let w: any;
 w = NaN;
 
 // if (w === false || w === null || w === undefined || w === 0 ||w === -0 || w === 0n || w === "" || w === NaN) {
@@ -299,13 +323,16 @@ w = !w ? "default" : w; // вирішення через !w підглянув �
 console.log(w);
 
 
-
 console.log('---------------------------');
 // #awLXL6TBzg
 //     - з файлу arrays.js (лежить в папці 2023 plan ) взяти масив coursesAndDurationArray.
 //     За допомоги іф перевірити кожен його елемент на тривалість навчання. У випадку якщо тривалість довша за 5 місяців вивести в консоль "Супер".
+interface IcoursesAndDurationArray{
+    title: string;
+    monthDuration: number;
+}
 
-let coursesAndDurationArray = [
+let coursesAndDurationArray1: IcoursesAndDurationArray[] = [
     {title: 'JavaScript Complex', monthDuration: 5},
     {title: 'Java Complex', monthDuration: 6},
     {title: 'Python Complex', monthDuration: 6},
@@ -314,21 +341,21 @@ let coursesAndDurationArray = [
     {title: 'Frontend', monthDuration: 4}
 ];
 
-if (coursesAndDurationArray[0].monthDuration >5) {
-    console.log(coursesAndDurationArray[0].title,': ', 'Супер');
+if (coursesAndDurationArray1[0].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[0].title, ': ', 'Супер');
 }
-if (coursesAndDurationArray[1].monthDuration >5) {
-    console.log(coursesAndDurationArray[1].title,': ', 'Супер');
+if (coursesAndDurationArray1[1].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[1].title, ': ', 'Супер');
 }
-if (coursesAndDurationArray[2].monthDuration >5) {
-    console.log(coursesAndDurationArray[2].title,': ', 'Супер');
+if (coursesAndDurationArray1[2].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[2].title, ': ', 'Супер');
 }
-if (coursesAndDurationArray[3].monthDuration >5) {
-    console.log(coursesAndDurationArray[3].title,': ', 'Супер');
+if (coursesAndDurationArray1[3].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[3].title, ': ', 'Супер');
 }
-if (coursesAndDurationArray[4].monthDuration >5) {
-    console.log(coursesAndDurationArray[4].title,': ', 'Супер');
+if (coursesAndDurationArray1[4].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[4].title, ': ', 'Супер');
 }
-if (coursesAndDurationArray[5].monthDuration >5) {
-    console.log(coursesAndDurationArray[5].title,': ', 'Супер');
+if (coursesAndDurationArray1[5].monthDuration > 5) {
+    console.log(coursesAndDurationArray1[5].title, ': ', 'Супер');
 }

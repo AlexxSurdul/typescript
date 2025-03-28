@@ -1,7 +1,7 @@
 // #y7crMeFwHcS
 // - За допомогою циклу for і document.write() вивести 10 блоків div c довільним текстом всередині
 
-for (let a = 0; a < 10; a++) {
+for (let a: number = 0; a < 10; a++) {
     document.write(`<div>text</div>`);
 
 }
@@ -9,14 +9,14 @@ for (let a = 0; a < 10; a++) {
 // #TYj7ncx
 // - За допомогою циклу for і document.write() вивести 10 блоків div c довільним текстом і індексом всередині
 
-for (let b = 0; b < 10; b++) {
+for (let b: number = 0; b < 10; b++) {
     document.write(`<div>Number ${b}</div>`);
 }
 
 // #uzkt71dp
 // - За допомогою циклу while вивести в документ 20 блоків h1 c довільним текстом всередині.
 
-let c = 0;
+let c: number = 0;
 while (c < 10) {
     document.write(`<h1>Head text</h1>`);
     c++
@@ -25,7 +25,7 @@ while (c < 10) {
 //     #OeT7t3uUMFi
 // - За допомогою циклу while вивести в документ 20 блоків h1 c довільним текстом і індексом всередині.
 
-let d = 0;
+let d: number = 0;
 while (d < 10) {
     document.write(`<h1>Head ${d}</h1>`);
     d++
@@ -51,7 +51,7 @@ while (d < 10) {
 //
 // замість 'ITEM OF ARRAY' підставити елемент з масиву щоб получився цілий список з даними з масиву
 //
-let listOfItems = ['html', 'css', 'javascript', 'mysql', 'mongodb', 'react', 'angular', 'node.js'];
+let listOfItems: string[] = ['html', 'css', 'javascript', 'mysql', 'mongodb', 'react', 'angular', 'node.js'];
 
 document.write(`<ul>`);
 
@@ -98,8 +98,12 @@ document.write(`</ul>`);
 // </div>
 // Замість TITLE PRICE IMAGE - підставити відповідні поля з об'єкту
 
-
-let products = [
+interface Iproducts {
+    title: string;
+    price: number;
+    image: string;
+}
+let products: Iproducts[] = [
     {
         title: 'milk',
         price: 22,
@@ -150,8 +154,12 @@ for (const product of products) {
 // - користувачів зі статусом true
 // - користувачів зі статусом false
 // - користувачів які старші за 30 років
-
-let users = [
+interface Iusers1 {
+    name: string;
+    age: number;
+    status: boolean;
+}
+let users1: Iusers1[] = [
     {name: 'vasya', age: 31, status: false},
     {name: 'petya', age: 30, status: true},
     {name: 'kolya', age: 29, status: true},
@@ -165,8 +173,8 @@ let users = [
     {name: 'max', age: 31, status: true}
 ];
 
-for (let i = 0; i < users.length; i++) {
-    const user = users[i];
+for (let i: number = 0; i < users1.length; i++) {
+    const user = users1[i];
     if (user.status) {
         console.log(user);
     }
@@ -174,8 +182,8 @@ for (let i = 0; i < users.length; i++) {
 
 console.log('--------------');
 
-for (let i = 0; i < users.length; i++) {
-    const user = users[i];
+for (let i = 0; i < users1.length; i++) {
+    const user = users1[i];
     if (!user.status) {
         console.log(user);
     }
@@ -183,8 +191,8 @@ for (let i = 0; i < users.length; i++) {
 
 console.log('--------------');
 
-for (let i = 0; i < users.length; i++) {
-    const user = users[i];
+for (let i = 0; i < users1.length; i++) {
+    const user = users1[i];
     if (user.age > 30) {
         console.log(user);
     }
