@@ -2,7 +2,7 @@
 // - Знайти та вивести довижину настипних стрінгових значень
 // 'hello world', 'lorem ipsum', 'javascript is cool'
 
-const strCounter = (string) => string.length;
+const strCounter = (string: string): number => string.length;
 console.log(strCounter('hello world'));
 console.log(strCounter('lorem ipsum'));
 console.log(strCounter('javascript is cool'));
@@ -12,7 +12,7 @@ console.log('----------------------------');
 // - Перевести до великого регістру наступні стрінгові значення
 // 'hello world', 'lorem ipsum', 'javascript is cool'
 
-const strtoUpperCase = (a) => a.toUpperCase();
+const strtoUpperCase = (a: string): string => a.toUpperCase();
 console.log(strtoUpperCase('hello world'));
 console.log(strtoUpperCase('lorem ipsum'));
 console.log(strtoUpperCase('javascript is cool'));
@@ -24,7 +24,7 @@ console.log('----------------------------');
 // - Перевести до нижнього регістру настипні стрінгові значення
 // 'HELLO WORLD', 'LOREM IPSUM', 'JAVASCRIPT IS COOL'
 
-const strtoLowerCase = (a) => a.toLowerCase();
+const strtoLowerCase = (a: string): string => a.toLowerCase();
 console.log(strtoLowerCase('HELLO WORLD'));
 console.log(strtoLowerCase('LOREM IPSUM'));
 console.log(strtoLowerCase('JAVASCRIPT IS COOL'));
@@ -35,7 +35,7 @@ console.log('----------------------------');
 // #0b89BkYZwu
 // - Є "брудна" стрінга let str = ' dirty string   ' . Почистити її від зайвих пробілів.
 
-const strD = ' dirty string   ';
+const strD: string = ' dirty string   ';
 console.log(strD.replaceAll(' ', ''))
 
 console.log('----------------------------');
@@ -44,7 +44,7 @@ console.log('----------------------------');
 //     let str = 'Ревуть воли як ясла повні';
 // let arr = stringToarray(str); ['Ревуть', 'воли', 'як', 'ясла', 'повні']
 
-const strR = 'Ревуть воли як ясла повні';
+const strR: string = 'Ревуть воли як ясла повні';
 console.log(strR.split(' '));
 
 console.log('----------------------------');
@@ -52,8 +52,8 @@ console.log('----------------------------');
 // - є масив чисел [10,8,-7,55,987,-1011,0,1050,0] . за допомоги map  перетворити всі об'єкти в масиві на стрінгові.
 
 
-const numArr = [10, 8, -7, 55, 987, -1011, 0, 1050, 0];
-const stringArr = numArr.map(converter => converter.toString());
+const numArr: number[] = [10, 8, -7, 55, 987, -1011, 0, 1050, 0];
+const stringArr: string[] = numArr.map(converter => converter.toString());
 console.log(stringArr);
 
 console.log('----------------------------');
@@ -65,10 +65,10 @@ console.log('----------------------------');
 //
 // ==========================
 
-const nums = [11, 21, 3, -5, 100];
+const nums: number[] = [11, 21, 3, -5, 100];
 
 
-function sortNums(array, direction) {
+function sortNums(array: number[], direction: string): number[] {
     if (direction === 'ascending') {
         array.sort((a, b) => a - b);
     } else if (direction === 'descending') {
@@ -96,8 +96,12 @@ console.log('----------------------------');
 // -- відфільтрувати , залишивши тільки курси з тривалістю більше 5 місяців
 // -- за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration}
 // =========================
+interface IcoursesAndDurationArray {
+    title: string;
+    monthDuration: number;
+}
 
-const coursesAndDurationArray = [
+const coursesAndDurArr: IcoursesAndDurationArray[] = [
     {title: 'JavaScript Complex', monthDuration: 5},
     {title: 'Java Complex', monthDuration: 6},
     {title: 'Python Complex', monthDuration: 6},
@@ -106,13 +110,13 @@ const coursesAndDurationArray = [
     {title: 'Frontend', monthDuration: 4}
 ];
 
-const sortDuration = coursesAndDurationArray.sort((a, b) => a.monthDuration - b.monthDuration);
+const sortDuration = coursesAndDurArr.sort((a, b) => a.monthDuration - b.monthDuration);
 console.log(sortDuration);
 
-const filterDuration = coursesAndDurationArray.filter((value) => value.monthDuration > 5);
+const filterDuration = coursesAndDurArr.filter((value) => value.monthDuration > 5);
 console.log(filterDuration);
 
-const mapDuration = coursesAndDurationArray.map((value, index) => {
+const mapDuration = coursesAndDurArr.map((value, index) => {
     return {id: index + 1, title: value.title, monthDuration: value.monthDuration};
 });
 console.log(mapDuration);
@@ -130,8 +134,8 @@ console.log('----------------------------');
 //
 // =========================
 
-const cardSuits = ['spade', 'diamond', 'heart', 'clubs'];
-const cardValues = ['6', '7', '8', '9', '10', 'ace', 'jack', 'queen', 'king'];
+const cardSuits: string[] = ['spade', 'diamond', 'heart', 'clubs'];
+const cardValues: string[] = ['6', '7', '8', '9', '10', 'ace', 'jack', 'queen', 'king'];
 // const cardColors = ['red', 'black'];
 
 // const colorSuits = cardSuits.map(function (value) {
@@ -141,12 +145,16 @@ const cardValues = ['6', '7', '8', '9', '10', 'ace', 'jack', 'queen', 'king'];
 //         return {suit: value, color: cardColors[0]};
 //     }
 // })
+interface IcardsSet {
+    value: string;
+    suit: string;
+    color: string;
+}
 
-
-const cardsSet = [];
+const cardsSet: IcardsSet[] = [];
 for (const cardSuit of cardSuits) {
     for (const cardValue of cardValues) {
-        const card = {value: cardValue, suit: cardSuit};
+        const card = {value: cardValue, suit: cardSuit, color: 'string'};
         if (cardSuit === 'spade' || cardSuit === 'clubs') {
             card.color = 'black'
         } else {
@@ -179,8 +187,14 @@ console.log('----------------------------');
 //     clubs:[]
 // }
 // =========================
+interface IsortedCardsArray {
+    clubs: IcardsSet[];
+    spades: IcardsSet[];
+    diamonds: IcardsSet[];
+    hearts: IcardsSet[];
+}
 
-const sortedCards = cardsSet.reduce((acc, card) => {
+const sortedCards: IsortedCardsArray = cardsSet.reduce((acc: IsortedCardsArray, card: IcardsSet): IsortedCardsArray => {
         if (card.suit === 'spade') {
             acc.spades.push(card)
         } else if (card.suit === 'diamond') {
@@ -205,7 +219,14 @@ console.log('----------------------------');
 // --написати пошук всіх об'єктів, в яких в modules є sass
 // --написати пошук всіх об'єктів, в яких в modules є docker
 
-let coursesArray = [
+interface IcoursesArray {
+    title: string;
+    monthDuration: number;
+    hourDuration: number;
+    modules: string[];
+}
+
+let coursesArray: IcoursesArray[] = [
     {
         title: 'JavaScript Complex',
         monthDuration: 5,
@@ -216,17 +237,7 @@ let coursesArray = [
         title: 'Java Complex',
         monthDuration: 6,
         hourDuration: 909,
-        modules: ['html',
-            'css',
-            'js',
-            'mysql',
-            'mongodb',
-            'angular',
-            'aws',
-            'docker',
-            'git',
-            'java core',
-            'java advanced']
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'angular', 'aws', 'docker', 'git', 'java core', 'java advanced']
     },
     {
         title: 'Python Complex',
@@ -275,7 +286,7 @@ let coursesArray = [
     }
 ];
 
-function filteredSaas(arr, module) {
+function filteredSaas(arr:IcoursesArray[], module:string):IcoursesArray[] {
     return arr.filter(item =>
         item.modules.includes(module));
 }

@@ -2,7 +2,16 @@
 // - Створити функцію конструктор для об'єктів User з полями id, name, surname , email, phone
 // створити пустий масив, наповнити його 10 об'єктами new User(....)
 //
-function User(id, name, surname, email, phone) {
+
+interface IUserConstructor {
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    phone: string
+}
+
+function UserConstructor (id: number, name: string, surname: string, email: string, phone: string) {
     this.id = id;
     this.name = name;
     this.surname = surname;
@@ -10,33 +19,34 @@ function User(id, name, surname, email, phone) {
     this.phone = phone;
 }
 
-const users = [
-    new User(0, 'Іван', 'Іваненко', 'ivan@gmail.com', '+380505552233'),
-    new User(1, 'Олена', 'Петренко', 'olena@gmail.com', '+380675553344'),
-    new User(2, 'Андрій', 'Сидоренко', 'andriy@gmail.com', '+380935554455'),
-    new User(3, 'Марина', 'Коваленко', 'marina@gmail.com', '+380685556677'),
-    new User(4, 'Василь', 'Мельник', 'vasyl@gmail.com', '+380505558899'),
-    new User(5, 'Тетяна', 'Шевченко', 'tetiana@gmail.com', '+380675551122'),
-    new User(6, 'Олександр', 'Бондаренко', 'oleksandr@gmail.com', '+380935559900'),
-    new User(7, 'Катерина', 'Гриценко', 'kateryna@gmail.com', '+380685552233'),
-    new User(8, 'Юрій', 'Кравченко', 'yuriy@gmail.com', '+380505553344'),
-    new User(9, 'Наталія', 'Лисенко', 'nataliya@gmail.com', '+380675554455')
+
+const usersNew: IUserConstructor[] = [
+    new UserConstructor(0, 'Іван', 'Іваненко', 'ivan@gmail.com', '+380505552233'),
+    new UserConstructor(1, 'Олена', 'Петренко', 'olena@gmail.com', '+380675553344'),
+    new UserConstructor(2, 'Андрій', 'Сидоренко', 'andriy@gmail.com', '+380935554455'),
+    new UserConstructor(3, 'Марина', 'Коваленко', 'marina@gmail.com', '+380685556677'),
+    new UserConstructor(4, 'Василь', 'Мельник', 'vasyl@gmail.com', '+380505558899'),
+    new UserConstructor(5, 'Тетяна', 'Шевченко', 'tetiana@gmail.com', '+380675551122'),
+    new UserConstructor(6, 'Олександр', 'Бондаренко', 'oleksandr@gmail.com', '+380935559900'),
+    new UserConstructor(7, 'Катерина', 'Гриценко', 'kateryna@gmail.com', '+380685552233'),
+    new UserConstructor(8, 'Юрій', 'Кравченко', 'yuriy@gmail.com', '+380505553344'),
+    new UserConstructor(9, 'Наталія', 'Лисенко', 'nataliya@gmail.com', '+380675554455')
 ];
 
-console.log(users);
+console.log(usersNew);
 
 console.log('-----');
 // #2ikXsE2WiKZ
 // - Взяти масив з  User[] з попереднього завдання, та відфільтрувати , залишивши тільки об'єкти з парними id (filter)
 
-const filteredUsers = users.filter(user => user.id % 2 === 0);
+const filteredUsers: user[] = usersNew.filter(user => user.id % 2 === 0);
 console.log(filteredUsers);
 
 console.log('-----');
 //
 // #pOeHKct
 // - Взяти масив з  User[] з попереднього завдання, та відсортувати його по id. по зростанню (sort)
-const sortedUsers = users.sort((a, b) => a.id - b.id);
+const sortedUsers = usersNew.sort((a, b) => a.id - b.id);
 console.log(sortedUsers);
 
 console.log('-----');

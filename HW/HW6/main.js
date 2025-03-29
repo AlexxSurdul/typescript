@@ -61,21 +61,7 @@ function sortNums(array, direction) {
 console.log(sortNums(nums, 'ascending')); // [3,11,21]
 console.log(sortNums(nums, 'descending')); // [21,11,3]
 console.log('----------------------------');
-// #yo06d74c1C
-// - є масив
-// let coursesAndDurationArray = [
-//     {title: 'JavaScript Complex', monthDuration: 5},
-//     {title: 'Java Complex', monthDuration: 6},
-//     {title: 'Python Complex', monthDuration: 6},
-//     {title: 'QA Complex', monthDuration: 4},
-//     {title: 'FullStack', monthDuration: 7},
-//     {title: 'Frontend', monthDuration: 4}
-// ];
-// -- відсортувати його за спаданням за monthDuration
-// -- відфільтрувати , залишивши тільки курси з тривалістю більше 5 місяців
-// -- за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration}
-// =========================
-const coursesAndDurationArray = [
+const coursesAndDurArr = [
     { title: 'JavaScript Complex', monthDuration: 5 },
     { title: 'Java Complex', monthDuration: 6 },
     { title: 'Python Complex', monthDuration: 6 },
@@ -83,11 +69,11 @@ const coursesAndDurationArray = [
     { title: 'FullStack', monthDuration: 7 },
     { title: 'Frontend', monthDuration: 4 }
 ];
-const sortDuration = coursesAndDurationArray.sort((a, b) => a.monthDuration - b.monthDuration);
+const sortDuration = coursesAndDurArr.sort((a, b) => a.monthDuration - b.monthDuration);
 console.log(sortDuration);
-const filterDuration = coursesAndDurationArray.filter((value) => value.monthDuration > 5);
+const filterDuration = coursesAndDurArr.filter((value) => value.monthDuration > 5);
 console.log(filterDuration);
-const mapDuration = coursesAndDurationArray.map((value, index) => {
+const mapDuration = coursesAndDurArr.map((value, index) => {
     return { id: index + 1, title: value.title, monthDuration: value.monthDuration };
 });
 console.log(mapDuration);
@@ -104,18 +90,10 @@ console.log('----------------------------');
 // =========================
 const cardSuits = ['spade', 'diamond', 'heart', 'clubs'];
 const cardValues = ['6', '7', '8', '9', '10', 'ace', 'jack', 'queen', 'king'];
-// const cardColors = ['red', 'black'];
-// const colorSuits = cardSuits.map(function (value) {
-//     if (value === 'spade' || value === 'clubs') {
-//         return {suit: value, color: cardColors[1]};
-//     } else {
-//         return {suit: value, color: cardColors[0]};
-//     }
-// })
 const cardsSet = [];
 for (const cardSuit of cardSuits) {
     for (const cardValue of cardValues) {
-        const card = { value: cardValue, suit: cardSuit };
+        const card = { value: cardValue, suit: cardSuit, color: 'string' };
         if (cardSuit === 'spade' || cardSuit === 'clubs') {
             card.color = 'black';
         }
@@ -138,15 +116,6 @@ console.log(cardsSet.filter((card) => card.color === 'red'));
 console.log(cardsSet.filter((card) => card.suit === 'diamond'));
 console.log(cardsSet.filter((card) => card.suit === 'clubs' && card.value !== '6' && card.value !== '7' && card.value !== '8'));
 console.log('----------------------------');
-//     #EP5I1UUzAX
-// Взяти описану колоду карт, та за допомоги reduce упакувати всі карти по "мастях" в об'єкт
-// {
-//     spades:[],
-//         diamonds:[],
-//     hearts:[],
-//     clubs:[]
-// }
-// =========================
 const sortedCards = cardsSet.reduce((acc, card) => {
     if (card.suit === 'spade') {
         acc.spades.push(card);
@@ -169,10 +138,6 @@ const sortedCards = cardsSet.reduce((acc, card) => {
 });
 console.log(sortedCards);
 console.log('----------------------------');
-// #4LJn7zBx
-// взяти з arrays.js масив coursesArray
-// --написати пошук всіх об'єктів, в яких в modules є sass
-// --написати пошук всіх об'єктів, в яких в modules є docker
 let coursesArray = [
     {
         title: 'JavaScript Complex',
@@ -184,17 +149,7 @@ let coursesArray = [
         title: 'Java Complex',
         monthDuration: 6,
         hourDuration: 909,
-        modules: ['html',
-            'css',
-            'js',
-            'mysql',
-            'mongodb',
-            'angular',
-            'aws',
-            'docker',
-            'git',
-            'java core',
-            'java advanced']
+        modules: ['html', 'css', 'js', 'mysql', 'mongodb', 'angular', 'aws', 'docker', 'git', 'java core', 'java advanced']
     },
     {
         title: 'Python Complex',
