@@ -3,8 +3,7 @@
 // Створити функцію, яка робить глибоку копію об'єкту.
 // Додати перевірки на undefined, null, NaN.
 //     Подумати і реалізувати логіку, в якій кінцевий об'єкт буде мати функції, які в нього були до цього моменту.
-//--------об'єкт з функцією всередині------------
-const users = [
+const UsersFoo = [
     {
         name: 'John',
         email: 'john@example.com',
@@ -25,7 +24,7 @@ const users = [
     }
 ];
 // console.log(users.nameUpperCase()); //перевірка функції
-console.log(users);
+console.log(UsersFoo);
 console.log('-----');
 // //---------функція копіювання, не працює для масиву об'єктів з функціями-------------------
 //
@@ -58,11 +57,9 @@ function objFnArrCopier(objToCopying) {
     });
     return objTemp;
 }
-let usersArrCopy = objFnArrCopier(users);
+let usersArrCopy = objFnArrCopier(UsersFoo);
 console.log(usersArrCopy);
 console.log('-----');
-// #iz6emEsP2BA
-// - є масив
 let coursesAndDurationArray = [
     { title: 'JavaScript Complex', monthDuration: 5 },
     { title: 'Java Complex', monthDuration: 6 },
@@ -73,5 +70,8 @@ let coursesAndDurationArray = [
 ];
 // за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration
 //     Зробити все ВИКЛЮЧНО за допомоги інлайн конструкції
-let newArray = coursesAndDurationArray.map((item, index) => ({ ...item, id: index + 1 }));
+let newArray = coursesAndDurationArray.map((item, index) => ({
+    ...item,
+    id: index + 1
+}));
 console.log(newArray);

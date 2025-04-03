@@ -4,7 +4,16 @@
 //     Подумати і реалізувати логіку, в якій кінцевий об'єкт буде мати функції, які в нього були до цього моменту.
 
 //--------об'єкт з функцією всередині------------
-const users = [
+interface iUsersFoo {
+    name: string;
+    email: string;
+    password: string;
+    age: number;
+
+    nameUpperCase(): string;
+}
+
+const UsersFoo: iUsersFoo[] = [
     {
         name: 'John',
         email: 'john@example.com',
@@ -26,7 +35,7 @@ const users = [
 ];
 
 // console.log(users.nameUpperCase()); //перевірка функції
-console.log(users);
+console.log(UsersFoo);
 
 console.log('-----');
 // //---------функція копіювання, не працює для масиву об'єктів з функціями-------------------
@@ -47,7 +56,7 @@ console.log('-----');
 
 //---------спроба скопіювати масив об'єктів---------------
 
-function objFnArrCopier(objToCopying) {
+function objFnArrCopier(objToCopying: {}): {} {
 
     if (Array.isArray(objToCopying)) {
         return objToCopying.map(item => objFnArrCopier(item));
@@ -57,10 +66,10 @@ function objFnArrCopier(objToCopying) {
         return objToCopying;
     }
 
-    let objTemp = JSON.parse(JSON.stringify(objToCopying));
+    let objTemp: any = JSON.parse(JSON.stringify(objToCopying));
 
 
-    Object.entries(objToCopying).forEach(([key, value]) => {
+    Object.entries(objToCopying).forEach(([key, value]: [string, any]): void => {
         if (typeof value === 'function') {
             objTemp[key] = value;
         }
@@ -70,14 +79,20 @@ function objFnArrCopier(objToCopying) {
 }
 
 
-let usersArrCopy = objFnArrCopier(users);
+let usersArrCopy: {} = objFnArrCopier(UsersFoo);
 console.log(usersArrCopy);
 
 console.log('-----');
 
 // #iz6emEsP2BA
 // - є масив
-let coursesAndDurationArray = [
+type CoursesAndDurationArray = {
+    title: string;
+    monthDuration: number;
+    id?: number;
+}
+
+let coursesAndDurationArray: CoursesAndDurationArray[] = [
     {title: 'JavaScript Complex', monthDuration: 5},
     {title: 'Java Complex', monthDuration: 6},
     {title: 'Python Complex', monthDuration: 6},
@@ -89,7 +104,10 @@ let coursesAndDurationArray = [
 // за допомоги map перетворити кожен елемент на наступний тип {id,title,monthDuration
 //     Зробити все ВИКЛЮЧНО за допомоги інлайн конструкції
 
-let newArray = coursesAndDurationArray.map((item, index) => ({...item, id: index + 1}));
+let newArray: CoursesAndDurationArray[] = coursesAndDurationArray.map((item: CoursesAndDurationArray, index: number): CoursesAndDurationArray => ({
+    ...item,
+    id: index + 1
+}));
 
 
 console.log(newArray);
