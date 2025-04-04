@@ -8,9 +8,9 @@
 // let forms: HTMLCollectionOf<HTMLFormElement> = document.forms;
 // let f1: HTMLFormElement = forms[0];
 // // console.log(f1.username);
-// let f1Element: HTMLInputElement = f1['username'];
+// let f1Element: HTMLInputElement = f1['username'];            //динамічний ключ, що відповідає f1.username, щоб не було помилки
 // console.log(f1Element);
-// let p: HTMLParagraphElement = document.createElement('p');
+// let p: HTMLParagraphElement = document.createElement('p');   //можна через ctrl+p обрати що створити + ctrl+alt+v створити змінну одразу і типізувати її
 let users = [
     { name: 'vasya', age: 31, status: false },
     { name: 'petya', age: 30, status: true },
