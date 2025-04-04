@@ -1,5 +1,5 @@
-                    //в назві інтерфейсу використовуємо I - IUser
-                    //інтерфейс це модель даних
+//в назві інтерфейсу використовуємо I - IUser
+//інтерфейс це модель даних
 interface IUser {
     name: string;
     age: number;
@@ -7,14 +7,16 @@ interface IUser {
 
 }
 
-interface IUser {
-    id: number;
-}
-
-//
-// interface IUser2 extends IUser {
+// інтерфейс можна розшити декларуючи його другий раз з новими полями
+// interface IUser {
 //     id: number;
 // }
+
+//               аналогічно type можна створити розширений інтерфейс на основі існуючого
+//              бажано використовувати саме цей спосіб
+interface IUser2 extends IUser {
+    id: number;
+}
 
 let usersX: IUser[] = [
     {id: 1, name: 'vasya', age: 31, status: false},

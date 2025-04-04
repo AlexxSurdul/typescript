@@ -1,6 +1,6 @@
 interface IUser {
     id: number;
-    name: string
+    name: string;
 }
 
 fetch('https://jsonplaceholder.typicode.com/users')

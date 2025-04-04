@@ -1,10 +1,10 @@
-// type MyString = string;
+// type MyString = string;             //можна задати псевдонім для типів
 // let s: MyString = 'okten is cool';
 //
-// type PrimitiveTypes = string | number | boolean;
+// type PrimitiveTypes = string | number | boolean; //можна задати кілька типів для одного псевдоніму
 // let x: PrimitiveTypes = true;
 //
-// type Falsy = 0 | false | '' | undefined | null
+// type Falsy = 0 | false | '' | undefined | null  //наприклад можна одразу задати псевдонім для всіх фолсі значень
 //
 // // let f: Falsy = true;
 
@@ -16,8 +16,8 @@
 //     extra?: string   //можна задати ще одне не обов'язкове поле позначивши його через "елвіса" - ?:
 //     foo:(str: string) => string; //функція яка приймає стрінгу і повертає стрінгу
 // }
-//
-// type UserType2 = UserType & { id: number };
+//                               --Type model intersection--
+// type UserType2 = UserType & { id: number };  //ми можемо розширити type додатковими полями, якщо не можемо чи не хочемо міняти первинний type
 //
 // let users: UserType2[] = [
 //     {id: 1, name: 'vasya', age: 31, status: false},

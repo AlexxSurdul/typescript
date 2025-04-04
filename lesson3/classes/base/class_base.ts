@@ -13,7 +13,7 @@ class User {
     public greeting() {
         console.log('hello okten');
     }
-
+//для доступу до приватних полів потрібно згенерувати гетери і сетери через alt+insert (alt+fn+insert)
 
     get name(): string {
         return this._name;
@@ -45,6 +45,8 @@ let user = new User('asdsa', 123, true);
 console.log(user.name);
 user.name = 'asufdhgsaf';
 
+
+//класи в ТС також можуть екстендити інші класи як в ДЖС
 class User2 extends User {
     // id: number;
 
