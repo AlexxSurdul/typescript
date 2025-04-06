@@ -40,7 +40,7 @@ fetch('https://dummyjson.com/carts?limit=5')
             //ітеруємо товари в кошику
             for (const product of cart.products) {
 
-                //створюємо обгортку для кожного продукта
+                //створюємо обгортку для кожного продукту
                 let productBox:HTMLDivElement = document.createElement("div");
                 productBox.style.display = "flex";
                 productBox.style.flexDirection = "column";

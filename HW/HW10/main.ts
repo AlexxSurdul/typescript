@@ -18,11 +18,10 @@ document.body.append(textElement, buttonElement);
 
 //івент для приховування блока
 buttonElement.onclick = (): void => {
-    let hiddenElement: HTMLDivElement = document.getElementById('text');
-    if (hiddenElement) {
+    const hiddenElement = document.getElementById('text');
+    if (hiddenElement instanceof HTMLDivElement) {
         hiddenElement.classList.toggle('hidden');
     }
-
 }
 
 //         #j693ca8
@@ -30,15 +29,17 @@ buttonElement.onclick = (): void => {
 //     При натисканні на кнопку зчитати інформацію з інпуту та перевірити вік чи менше він ніж 18, та повідомити про це користувача
 
 //підтягуємо елементи з html
-const form: HTMLFormElement = document.getElementById('form');
-const ageInput: HTMLInputElement = document.getElementById('age');
-const result: HTMLDivElement = document.getElementById('result');
+const form = document.getElementById('form') as HTMLFormElement;
+const ageInput = document.getElementById('age') as HTMLInputElement;
+const result = document.getElementById('result') as HTMLDivElement;
 
 //функція перевірки віку, яка виводить попередження, якщо вік менше 18
-form.onsubmit = function (ev): void {
+form.onsubmit = function (ev: SubmitEvent): void {
     ev.preventDefault();
-    if (ageInput.value < 18) {
+    if (parseInt(ageInput.value) < 18) {
         result.innerText = 'Ви не досягли повноліття';
+    } else {
+        result.innerText = ''; // Очищаємо повідомлення, якщо вік >= 18
     }
 }
 
@@ -48,14 +49,14 @@ form.onsubmit = function (ev): void {
 // При натисканні на кнопку зчитати дані з полів, та вивести об'єкт в документ. Іншими словами : заповнили форму, натиснули кнопку, під формою з'явився блок з вашим об'єктом
 
 //підтягуємо елементи з html
-const form2: HTMLFormElement = document.getElementById('form2');
-const person: HTMLDivElement = document.getElementById('person');
-const personName: HTMLInputElement = document.getElementById('name');
-const personSurname: HTMLInputElement = document.getElementById('surname');
-const personAge: HTMLInputElement = document.getElementById('age2');
+const form2 = document.getElementById('form2') as HTMLFormElement;
+const person = document.getElementById('person') as HTMLDivElement;
+const personName = document.getElementById('name') as HTMLInputElement;
+const personSurname = document.getElementById('surname') as HTMLInputElement;
+const personAge = document.getElementById('age2') as HTMLInputElement;
 
 //функція, яка виводить дані з інпутів
-form2.onsubmit = function (ev): void {
+form2.onsubmit = function (ev: SubmitEvent): void {
     ev.preventDefault();
     person.innerText = `${personName.value} ${personSurname.value} ${personAge.value}`;
 
@@ -70,9 +71,9 @@ numberBox.classList.add('block');
 document.body.appendChild(numberBox);
 
 //заповнюємо блок числом, яке буде збільшуватись після перезавантаження сторінки
-let number: number = localStorage.getItem('value') || 0;
-number = parseInt(number);
-numberBox.textContent = number;
+let numberStr: string | null = localStorage.getItem('value');
+let number: number = numberStr ? parseInt(numberStr, 10) : 0;
+numberBox.textContent = number.toString();
 localStorage.setItem('value', JSON.stringify(number + 1));
 
 
@@ -83,13 +84,18 @@ localStorage.setItem('value', JSON.stringify(number + 1));
 // Інфу НЕ виводити в консоль, а малювати в DOM
 
 //задаємо масив об'єктів
-let sessionsList: any[] = [];
+interface Session {
+    date: string;
+}
+
+let sessionsList: Session[] = [];
+const storedSessions = localStorage.getItem('sessionsList');
 //заповнюємо його датами, якщо запису в локалсторедж ще нема, то вносимо новий. якщо є - додаємо новий об'єкт до масиву в локалсторедж
-if (localStorage.getItem('sessionsList') === null) {
-    sessionsList.push({date: new Date()});
+if (storedSessions === null) {
+    sessionsList.push({date: new Date().toISOString()});
 } else {
-    sessionsList = JSON.parse(localStorage.getItem('sessionsList'));
-    sessionsList.push({date: new Date()});
+    sessionsList = JSON.parse(storedSessions);
+    sessionsList.push({date: new Date().toISOString()});
 }
 localStorage.setItem('sessionsList', JSON.stringify(sessionsList));
 //код для підтягування даних і запис в DOM на сторінці sessionsListPage.html
@@ -99,11 +105,16 @@ localStorage.setItem('sessionsList', JSON.stringify(sessionsList));
 // При введенні даних обрахунок стається миттєво, без натискань додаткових кнопок
 
 //підтягуємо інпути з html
-const kilo: HTMLInputElement = document.getElementById('kilo');
-const pound: HTMLDivElement = document.getElementById('pound');
+const kilo = document.getElementById('kilo') as HTMLInputElement;
+const pound = document.getElementById('pound') as HTMLDivElement;
 //задаємо функцію, яка на льоту буде конвертувати кілограми у фунти
-kilo.oninput = function () {
-    pound.textContent = `${kilo.value * 2.20462262185}`;
+kilo.oninput = function (): void {
+    const kilograms = parseFloat(kilo.value);
+    if (!isNaN(kilograms)) {
+        pound.textContent = `${(kilograms * 2.20462262185).toFixed(2)}`;
+    } else {
+        pound.textContent = '';
+    }
 };
 
 // #RbQGnH5DuC
@@ -133,12 +144,16 @@ let usersW: IUsersW[] = [
 localStorage.setItem('users', JSON.stringify(usersW));
 
 //функція, яка додає об'єкт у заданий масив в localStorage
-function addToLocalStorage(arrayName: string, objToAdd: {}): void {
-    let newArr: IUsersW[] = JSON.parse(localStorage.getItem(arrayName));
+function addToLocalStorage(arrayName: string, objToAdd: IUsersW): void {
+    const storedArray = localStorage.getItem(arrayName);
     //перевіряємо чи в localStorage є потрібний масив, якщо він не null, то додаємо у нього об'єкт і пишемо назад в localStorage
-    if (newArr !== null) {
+    if (storedArray) {
+        const newArr: IUsersW[] = JSON.parse(storedArray);
         newArr.push(objToAdd);
         localStorage.setItem(arrayName, JSON.stringify(newArr));
+    } else {
+        // Якщо масиву з таким ім'ям не існує, можна створити новий
+        localStorage.setItem(arrayName, JSON.stringify([objToAdd]));
     }
 }
 
@@ -148,36 +163,43 @@ addToLocalStorage('users', {name: 'sdgsgd', age: 55, status: true});
 // Створити 3 інпута та кнопку. Один визначає кількість рядків, другий - кількість ячеєк, третій вміст ячеєк.
 //     При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
 
-document.getElementById('generateBtn').addEventListener('click', function () {
+document.getElementById('generateBtn')?.addEventListener('click', function () {
     // Отримуємо значення з інпутів, цифри парсимо в цілі числа
-    const rows = parseInt(document.getElementById('rows').value);
-    const cells = parseInt(document.getElementById('cells').value);
-    const content = document.getElementById('content').value;
+    const rowsInput = document.getElementById('rows') as HTMLInputElement;
+    const cellsInput = document.getElementById('cells') as HTMLInputElement;
+    const contentInput = document.getElementById('content') as HTMLInputElement;
+    const tableContainer = document.getElementById('tableContainer') as HTMLDivElement;
+
+    const rows = parseInt(rowsInput.value, 10);
+    const cells = parseInt(cellsInput.value, 10);
+    const content = contentInput.value;
 
     // Очищаємо контейнер для таблиці, без цього коду таблиця наповнюється безкінечно
-    const tableContainer = document.getElementById('tableContainer');
     tableContainer.innerHTML = '';
 
-    // Створюємо таблицю
-    const table = document.createElement('table');
+    if (!isNaN(rows) && !isNaN(cells) && rows > 0 && cells > 0) {
+        // Створюємо таблицю
+        const table = document.createElement('table');
 
-    // Додаємо рядки та ячейки
-    for (let i = 0; i < rows; i++) {
-        const row = document.createElement('tr');
+        // Додаємо рядки та ячейки
+        for (let i = 0; i < rows; i++) {
+            const row = document.createElement('tr');
 
-        for (let j = 0; j < cells; j++) {
-            const cell = document.createElement('td');
-            cell.textContent = content; // Вставляємо вміст у ячейку
-            row.appendChild(cell);
+            for (let j = 0; j < cells; j++) {
+                const cell = document.createElement('td');
+                cell.textContent = content; // Вставляємо вміст у ячейку
+                row.appendChild(cell);
+            }
+
+            table.appendChild(row);
         }
 
-        table.appendChild(row);
+        // Додаємо таблицю до контейнера
+        tableContainer.appendChild(table);
+    } else {
+        tableContainer.textContent = 'Будь ласка, введіть коректні значення для кількості рядків та стовпців.';
     }
-
-    // Додаємо таблицю до контейнера
-    tableContainer.appendChild(table);
 });
-
 //     #bq1zkx7WP
 // *** (подібне було вище, але...будьте уважні в другій частині) створити сторінку з довільним блоком, в середині якого є значення "100грн"
 // при перезавантаженні сторінки до значення додається по 10 грн, але !!!
@@ -189,14 +211,20 @@ const numberBoxDelay = document.createElement('div');
 numberBoxDelay.classList.add('block');
 document.body.appendChild(numberBoxDelay);
 
+const lastReloadTimeStr: string | null = localStorage.getItem('lastReloadTime');
+const currentTime = Date.now();
+const tenSeconds = 10000;
 //заповнюємо блок числом, яке буде збільшуватись після перезавантаження сторінки із затримкою
-let numberDelay = localStorage.getItem('valueDelay') || 100;
-numberDelay = parseInt(numberDelay);
+let numberDelayStr: string | null = localStorage.getItem('valueDelay');
+let numberDelay: number = numberDelayStr ? parseInt(numberDelayStr, 10) : 100;
+
+if (!lastReloadTimeStr || currentTime - parseInt(lastReloadTimeStr, 10) > tenSeconds) {
+    numberDelay += 10;
+    localStorage.setItem('valueDelay', JSON.stringify(numberDelay));
+}
+
 numberBoxDelay.textContent = `${numberDelay} грн`;
-//додаємо затримку через setTimeout у 10 с (10 тис мс)
-setTimeout(() => {
-    localStorage.setItem('valueDelay', JSON.stringify(numberDelay + 10));
-}, 10000);
+localStorage.setItem('lastReloadTime', currentTime.toString());
 
 
 // #NKB0tgWIK1G
@@ -206,7 +234,14 @@ setTimeout(() => {
 //     При натисканні next виводяться наступні 10 об'єктів
 // При натисканні prev виводяться попередні 10 об'єктів
 
-const bigArr = [
+interface DataObject {
+    id: number;
+    name: string;
+    value: number;
+    active: boolean;
+}
+
+const bigArr: DataObject[] = [
     {"id": 1, "name": "Object 1", "value": 10, "active": true},
     {"id": 2, "name": "Object 2", "value": 20, "active": false},
     {"id": 3, "name": "Object 3", "value": 30, "active": true},
@@ -310,24 +345,24 @@ const bigArr = [
 ];
 
 //підтягуємо елементи з HTML
-let list10 = document.getElementById("list10");
-let prev = document.getElementById("prev");
-let next = document.getElementById("next");
+const list10 = document.getElementById("list10") as HTMLUListElement;
+const prev = document.getElementById("prev") as HTMLButtonElement;
+const next = document.getElementById("next") as HTMLButtonElement;
 
-let b = 0;
+let b:number = 0;
 
 //
-function listUpdater() {
+function listUpdater(): void {
 //додаємо в li об'єкти з масиву
-    for (let i = b; i < b + 10 && i < bigArr.length; i++) {
-        let li = document.createElement('li');
+    for (let i:number = b; i < b + 10 && i < bigArr.length; i++) {
+        let li:HTMLLIElement = document.createElement('li');
         list10.appendChild(li);
         li.textContent = JSON.stringify(bigArr[i]);
     }
 }
 
 //задаємо логіку роботи next
-next.onclick = function () {
+next.onclick = function ():void {
     if (b < bigArr.length - 10) {
         list10.innerHTML = '';
         b = b + 10;
@@ -336,7 +371,7 @@ next.onclick = function () {
 }
 
 //задаємо логіку роботи prev
-prev.onclick = function () {
+prev.onclick = function ():void {
     if (b > 0) {
         list10.innerHTML = '';
         b = b - 10;
