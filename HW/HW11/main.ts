@@ -1,23 +1,51 @@
 // #HmvAfRQM
 // - взяти https://dummyjson.com/docs/carts та вивести інформацію про всі корзини. Відобразити всі поля кожної корзини.
 
+interface ProductInCart {
+    id: number;
+    title: string;
+    price: number;
+    quantity: number;
+    total: number;
+    discountPercentage: number;
+    discountedPrice: number;
+    thumbnail: string;
+}
+
+interface Cart {
+    id: number;
+    products: ProductInCart[];
+    total: number;
+    discountedTotal: number;
+    userId: number;
+    totalProducts: number;
+    totalQuantity: number;
+}
+
+interface CartsResponse {
+    carts: Cart[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
 //дістаємо дані через АРІ
 fetch('https://dummyjson.com/carts?limit=5')
-    .then(res => res.json())
+    .then(res => res.json() as Promise<CartsResponse>)
     .then(data => {
 
         //деструктуруємо об'єкт, беремо лише {carts}
-        let {carts} = data;
+        const {carts} = data;
 
         //створюємо обгортку
-        let div:HTMLDivElement = document.createElement("div");
+        const div: HTMLDivElement = document.createElement("div");
         document.body.appendChild(div);
 
         //ітеруємо carts
         for (const cart of carts) {
 
             //створюємо контейнер для кожного кошика
-            let cartBox:HTMLDivElement = document.createElement("div");
+            let cartBox: HTMLDivElement = document.createElement("div");
             cartBox.style.border = "1px solid lightgray";
             cartBox.style.padding = "10px";
             cartBox.style.margin = "10px";
@@ -32,7 +60,7 @@ fetch('https://dummyjson.com/carts?limit=5')
              <p><strong>Total Quantity</strong>:  ${cart.totalQuantity}</p>`;
 
             //створюємо обгортку для продуктів в кошику
-            let productsBox:HTMLDivElement = document.createElement("div");
+            const  productsBox: HTMLDivElement = document.createElement("div");
             productsBox.style.display = "flex";
             productsBox.style.flexDirection = "row";
             cartBox.appendChild(productsBox);
@@ -41,7 +69,7 @@ fetch('https://dummyjson.com/carts?limit=5')
             for (const product of cart.products) {
 
                 //створюємо обгортку для кожного продукту
-                let productBox:HTMLDivElement = document.createElement("div");
+                const  productBox: HTMLDivElement = document.createElement("div");
                 productBox.style.display = "flex";
                 productBox.style.flexDirection = "column";
                 productBox.style.border = "1px solid lightgray";
@@ -67,22 +95,50 @@ fetch('https://dummyjson.com/carts?limit=5')
 //     #whXxOBlYS0H
 //     - взяти https://dummyjson.com/docs/recipes та вивести інформацію про всі рецепти. Інгредієнти повинні бути список під час відображення.
 
+interface Recipe {
+    id: number;
+    name: string;
+    image: string;
+    cuisine: string;
+    cookTimeMinutes: number;
+    prepTimeMinutes: number;
+    servings: number;
+    ingredients: string[];
+    instructions: string;
+    dishTypes: string[];
+    diets: string[];
+    occasions: string[];
+    calories: number;
+    carbohydrates: string;
+    fat: string;
+    protein: string;
+    userId: number;
+    difficulty: string
+}
+
+interface RecipesResponse {
+    recipes: Recipe[];
+    total: number;
+    skip: number;
+    limit: number;
+}
+
 fetch('https://dummyjson.com/recipes?limit=5')
-    .then(res => res.json())
+    .then(res => res.json() as Promise<RecipesResponse>)
     .then(data => {
         console.log(data);
 
         // отримуємо масив рецептів
-        const { recipes } = data;
+        const {recipes} = data;
 
         // створюємо контейнер для всіх рецептів
-        const container:HTMLDivElement = document.createElement("div");
+        const container: HTMLDivElement = document.createElement("div");
         document.body.appendChild(container);
 
         // ітеруємо рецепти
         recipes.forEach(recipe => {
             // створюємо контейнер для окремого рецепту
-            const recipeBox:HTMLDivElement = document.createElement("div");
+            const recipeBox: HTMLDivElement = document.createElement("div");
             recipeBox.style.border = "1px solid #ccc";
             recipeBox.style.padding = "10px";
             recipeBox.style.margin = "10px";
@@ -100,12 +156,12 @@ fetch('https://dummyjson.com/recipes?limit=5')
             `;
 
             // створюємо список для інгредієнтів
-            const ingredientsList:HTMLUListElement = document.createElement("ul");
+            const ingredientsList: HTMLUListElement = document.createElement("ul");
             recipeBox.appendChild(ingredientsList);
 
             // додаємо інгредієнти до списку
             recipe.ingredients.forEach(ingredient => {
-                const li:HTMLLIElement = document.createElement("li");
+                const li: HTMLLIElement = document.createElement("li");
                 li.textContent = ingredient;
                 ingredientsList.appendChild(li);
             });

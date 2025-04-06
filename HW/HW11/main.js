@@ -6,9 +6,9 @@ fetch('https://dummyjson.com/carts?limit=5')
     .then(res => res.json())
     .then(data => {
     //деструктуруємо об'єкт, беремо лише {carts}
-    let { carts } = data;
+    const { carts } = data;
     //створюємо обгортку
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     document.body.appendChild(div);
     //ітеруємо carts
     for (const cart of carts) {
@@ -26,14 +26,14 @@ fetch('https://dummyjson.com/carts?limit=5')
              <p><strong>Total Products</strong>:  ${cart.totalProducts}</p>
              <p><strong>Total Quantity</strong>:  ${cart.totalQuantity}</p>`;
         //створюємо обгортку для продуктів в кошику
-        let productsBox = document.createElement("div");
+        const productsBox = document.createElement("div");
         productsBox.style.display = "flex";
         productsBox.style.flexDirection = "row";
         cartBox.appendChild(productsBox);
         //ітеруємо товари в кошику
         for (const product of cart.products) {
-            //створюємо обгортку для кожного продукта
-            let productBox = document.createElement("div");
+            //створюємо обгортку для кожного продукту
+            const productBox = document.createElement("div");
             productBox.style.display = "flex";
             productBox.style.flexDirection = "column";
             productBox.style.border = "1px solid lightgray";
@@ -54,8 +54,6 @@ fetch('https://dummyjson.com/carts?limit=5')
         }
     }
 });
-//     #whXxOBlYS0H
-//     - взяти https://dummyjson.com/docs/recipes та вивести інформацію про всі рецепти. Інгредієнти повинні бути список під час відображення.
 fetch('https://dummyjson.com/recipes?limit=5')
     .then(res => res.json())
     .then(data => {
