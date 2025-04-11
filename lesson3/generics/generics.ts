@@ -32,7 +32,7 @@ if (item) {
 interface IDog {
     aka: string;
 }
-
+// кусок коду, який дозволить працювати з локалсторедж і типізувати об'єкти
 function foobar<T>(key: string): T {
     let objJSON = localStorage.getItem(key);
     if (objJSON) {

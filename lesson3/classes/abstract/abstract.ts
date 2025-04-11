@@ -1,3 +1,5 @@
+//абстракт забороняє створення об'єкту певного типу
+
 abstract class Animal {
     isAlive: boolean;
 
@@ -10,6 +12,7 @@ abstract class Animal {
 
 // let animal = new Animal(true);
 
+//але цей клас можна буде використовувати, як основу для чогось, для наслідування/розширення
 class Bird extends Animal {
     wings: boolean;
 

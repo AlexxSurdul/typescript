@@ -21,6 +21,7 @@ let item = localStorage.getItem('user');
 if (item) {
     let user = JSON.parse(item);
 }
+// кусок коду, який дозволить працювати з локалсторедж і типізувати об'єкти
 function foobar(key) {
     let objJSON = localStorage.getItem(key);
     if (objJSON) {
