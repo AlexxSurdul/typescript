@@ -20,14 +20,14 @@ console.log('-------------------------');
 // #LARqoUj5I
 
 // - Створити 3 об'єкти які описують книги. Поля об'єкту : title ,pageCount, genre.
-type AuthorsType = { name: string; age: number };
+type AuthorsType = { name: string; age: number }
 
 interface Ibooks {
     title: string;
     pageCount: number;
     genre: string;
-    authors?: AuthorsType[]
-};
+    authors?: AuthorsType[];
+}
 
 let book1: Ibooks = {
     title: '300 Spartans',
@@ -83,7 +83,7 @@ if (book6.authors) {
     console.log(book6.authors[1].name);
 } else {
     console.log("No authors available for this book.");
-};
+}
 
 console.log('------------------------');
 // #jCHFnEbdmFd

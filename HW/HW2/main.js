@@ -16,7 +16,6 @@ console.log(arr_a[7]);
 console.log(arr_a[8]);
 console.log(arr_a[9]);
 console.log('-------------------------');
-;
 let book1 = {
     title: '300 Spartans',
     pageCount: 300,
@@ -71,7 +70,6 @@ if (book6.authors) {
 else {
     console.log("No authors available for this book.");
 }
-;
 console.log('------------------------');
 let usersArr = [
     { name: 'UserOne', username: 'user1', password: 'pswrd1' },
